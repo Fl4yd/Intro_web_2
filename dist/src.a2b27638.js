@@ -183,6 +183,16 @@ var address = document.getElementById("input-address");
 var admin = document.getElementById("input-admin");
 var submit = document.getElementById("submit-data");
 var empty_table = document.getElementById("empty-table");
+function retrieve(table, column) {
+  var columnValues = [];
+  for (var i = 1; i < table.rows.length; i++) {
+    var row = table.rows[i];
+    var value = row.cells[column - 1].innerHTML;
+    columnValues.push(value);
+  }
+  console.log(columnValues);
+  return columnValues;
+}
 document.body.addEventListener("click", function (event) {
   if (event.target === empty_table) {
     var tbody = table.getElementsByTagName("tbody")[0];
@@ -192,12 +202,23 @@ document.body.addEventListener("click", function (event) {
     console.log("Table emptied");
   }
   if (event.target === submit) {
-    var newRow = table.insertRow();
-    newRow.insertCell().innerHTML = username.value;
-    newRow.insertCell().innerHTML = email.value;
-    newRow.insertCell().innerHTML = address.value;
-    admin.checked ? newRow.insertCell().innerHTML = "X" : newRow.insertCell().innerHTML = "-";
-    console.log(username.value + ":" + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
+    var usernames = retrieve(table, 1);
+    if (usernames.indexOf(username.value) != -1) {
+      console.log('User found from the database.');
+      var rowNumber = usernames.indexOf(username.value);
+      var row = table.rows[rowNumber + 1];
+      row.cells[1].innerHTML = email.value;
+      row.cells[2].innerHTML = address.value;
+      row.cells[3].innerHTML = admin.checked ? "X" : "-";
+      console.log('User: ' + username.value + " data updated: " + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
+    } else {
+      var newRow = table.insertRow();
+      newRow.insertCell().innerHTML = username.value;
+      newRow.insertCell().innerHTML = email.value;
+      newRow.insertCell().innerHTML = address.value;
+      admin.checked ? newRow.insertCell().innerHTML = "X" : newRow.insertCell().innerHTML = "-";
+      console.log(username.value + ":" + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
+    }
   }
 });
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -225,7 +246,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45403" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
