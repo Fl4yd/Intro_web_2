@@ -43,15 +43,15 @@ document.body.addEventListener("click", function (event) {
       : ("-");
 
       const file1 = image.files;
-      const newImage = document.createElement('img');
-      newImage.src = URL.createObjectURL(file1[0]);
-      newImage.width = 64;
-      newImage.height = 64;
-      row.cells[4].innerHTML = "";
-      row.cells[4].appendChild(newImage);
 
-      const file = image.files;
-      console.log(file);
+      if (file1.length != 0) {
+        const newImage = document.createElement('img');
+        newImage.src = URL.createObjectURL(file1[0]);
+        newImage.width = 64;
+        newImage.height = 64;
+        row.cells[4].innerHTML = "";
+        row.cells[4].appendChild(newImage);
+      }
       console.log('User: ' + username.value + " data updated: " + email.value +
       ":" +
       address.value +
@@ -63,15 +63,20 @@ document.body.addEventListener("click", function (event) {
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      const file2 = image.files;
-      const newImage = document.createElement('img');
-      newImage.src = URL.createObjectURL(file2[0]);
-      newImage.width = 64;
-      newImage.height = 64;
       newRow.insertCell().innerHTML = admin.checked
         ? ( "X")
         : ( "-");
+      const file2 = image.files;
+      if (file2.length != 0) {
+        const newImage = document.createElement('img');
+        newImage.src = URL.createObjectURL(file2[0]);
+        newImage.width = 64;
+        newImage.height = 64;
         newRow.insertCell().appendChild(newImage);
+      }else {
+        newRow.insertCell().innerHTML = "";
+      }
+    
       console.log(
         username.value +
           ":" +

@@ -212,27 +212,31 @@ document.body.addEventListener("click", function (event) {
       row.cells[2].innerHTML = address.value;
       row.cells[3].innerHTML = admin.checked ? "X" : "-";
       var file1 = image.files;
-      var newImage = document.createElement('img');
-      newImage.src = URL.createObjectURL(file1[0]);
-      newImage.width = 64;
-      newImage.height = 64;
-      row.cells[4].innerHTML = "";
-      row.cells[4].appendChild(newImage);
-      var file = image.files;
-      console.log(file);
+      if (file1.length != 0) {
+        var newImage = document.createElement('img');
+        newImage.src = URL.createObjectURL(file1[0]);
+        newImage.width = 64;
+        newImage.height = 64;
+        row.cells[4].innerHTML = "";
+        row.cells[4].appendChild(newImage);
+      }
       console.log('User: ' + username.value + " data updated: " + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
     } else {
       var newRow = table.insertRow();
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      var file2 = image.files;
-      var _newImage = document.createElement('img');
-      _newImage.src = URL.createObjectURL(file2[0]);
-      _newImage.width = 64;
-      _newImage.height = 64;
       newRow.insertCell().innerHTML = admin.checked ? "X" : "-";
-      newRow.insertCell().appendChild(_newImage);
+      var file2 = image.files;
+      if (file2.length != 0) {
+        var _newImage = document.createElement('img');
+        _newImage.src = URL.createObjectURL(file2[0]);
+        _newImage.width = 64;
+        _newImage.height = 64;
+        newRow.insertCell().appendChild(_newImage);
+      } else {
+        newRow.insertCell().innerHTML = "";
+      }
       console.log(username.value + ":" + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
     }
   }
