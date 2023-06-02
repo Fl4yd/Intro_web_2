@@ -181,6 +181,7 @@ var username = document.getElementById("input-username");
 var email = document.getElementById("input-email");
 var address = document.getElementById("input-address");
 var admin = document.getElementById("input-admin");
+var image = document.getElementById("input-image");
 var submit = document.getElementById("submit-data");
 var empty_table = document.getElementById("empty-table");
 function retrieve(table, column) {
@@ -210,13 +211,22 @@ document.body.addEventListener("click", function (event) {
       row.cells[1].innerHTML = email.value;
       row.cells[2].innerHTML = address.value;
       row.cells[3].innerHTML = admin.checked ? "X" : "-";
+      var file = image.files;
+      console.log(file);
       console.log('User: ' + username.value + " data updated: " + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
     } else {
       var newRow = table.insertRow();
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      admin.checked ? newRow.insertCell().innerHTML = "X" : newRow.insertCell().innerHTML = "-";
+      var _file = image.files;
+      console.log(_file[0]);
+      var newImage = document.createElement('img');
+      newImage.src = URL.createObjectURL(_file[0]);
+      newImage.width = 64;
+      newImage.height = 64;
+      newRow.insertCell().innerHTML = admin.checked ? newRow.insertCell().innerHTML = "X" : newRow.insertCell().innerHTML = "-";
+      newRow.insertCell().appendChild(newImage);
       console.log(username.value + ":" + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
     }
   }

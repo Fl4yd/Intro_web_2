@@ -5,6 +5,7 @@ const username = document.getElementById("input-username");
 const email = document.getElementById("input-email");
 const address = document.getElementById("input-address");
 const admin = document.getElementById("input-admin");
+const image = document.getElementById("input-image");
 const submit = document.getElementById("submit-data");
 const empty_table = document.getElementById("empty-table");
 
@@ -40,6 +41,8 @@ document.body.addEventListener("click", function (event) {
       row.cells[3].innerHTML = admin.checked
       ? ("X")
       : ("-");
+      const file = image.files;
+      console.log(file);
       console.log('User: ' + username.value + " data updated: " + email.value +
       ":" +
       address.value +
@@ -51,9 +54,16 @@ document.body.addEventListener("click", function (event) {
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      admin.checked
+      const file = image.files;
+      console.log(file[0]);
+      const newImage = document.createElement('img');
+      newImage.src = URL.createObjectURL(file[0]);
+      newImage.width = 64;
+      newImage.height = 64;
+      newRow.insertCell().innerHTML = admin.checked
         ? (newRow.insertCell().innerHTML = "X")
         : (newRow.insertCell().innerHTML = "-");
+        newRow.insertCell().appendChild(newImage);
       console.log(
         username.value +
           ":" +
