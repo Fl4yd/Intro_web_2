@@ -41,6 +41,15 @@ document.body.addEventListener("click", function (event) {
       row.cells[3].innerHTML = admin.checked
       ? ("X")
       : ("-");
+
+      const file1 = image.files;
+      const newImage = document.createElement('img');
+      newImage.src = URL.createObjectURL(file1[0]);
+      newImage.width = 64;
+      newImage.height = 64;
+      row.cells[4].innerHTML = "";
+      row.cells[4].appendChild(newImage);
+
       const file = image.files;
       console.log(file);
       console.log('User: ' + username.value + " data updated: " + email.value +
@@ -54,15 +63,14 @@ document.body.addEventListener("click", function (event) {
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      const file = image.files;
-      console.log(file[0]);
+      const file2 = image.files;
       const newImage = document.createElement('img');
-      newImage.src = URL.createObjectURL(file[0]);
+      newImage.src = URL.createObjectURL(file2[0]);
       newImage.width = 64;
       newImage.height = 64;
       newRow.insertCell().innerHTML = admin.checked
-        ? (newRow.insertCell().innerHTML = "X")
-        : (newRow.insertCell().innerHTML = "-");
+        ? ( "X")
+        : ( "-");
         newRow.insertCell().appendChild(newImage);
       console.log(
         username.value +

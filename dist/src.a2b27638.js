@@ -211,6 +211,13 @@ document.body.addEventListener("click", function (event) {
       row.cells[1].innerHTML = email.value;
       row.cells[2].innerHTML = address.value;
       row.cells[3].innerHTML = admin.checked ? "X" : "-";
+      var file1 = image.files;
+      var newImage = document.createElement('img');
+      newImage.src = URL.createObjectURL(file1[0]);
+      newImage.width = 64;
+      newImage.height = 64;
+      row.cells[4].innerHTML = "";
+      row.cells[4].appendChild(newImage);
       var file = image.files;
       console.log(file);
       console.log('User: ' + username.value + " data updated: " + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
@@ -219,14 +226,13 @@ document.body.addEventListener("click", function (event) {
       newRow.insertCell().innerHTML = username.value;
       newRow.insertCell().innerHTML = email.value;
       newRow.insertCell().innerHTML = address.value;
-      var _file = image.files;
-      console.log(_file[0]);
-      var newImage = document.createElement('img');
-      newImage.src = URL.createObjectURL(_file[0]);
-      newImage.width = 64;
-      newImage.height = 64;
-      newRow.insertCell().innerHTML = admin.checked ? newRow.insertCell().innerHTML = "X" : newRow.insertCell().innerHTML = "-";
-      newRow.insertCell().appendChild(newImage);
+      var file2 = image.files;
+      var _newImage = document.createElement('img');
+      _newImage.src = URL.createObjectURL(file2[0]);
+      _newImage.width = 64;
+      _newImage.height = 64;
+      newRow.insertCell().innerHTML = admin.checked ? "X" : "-";
+      newRow.insertCell().appendChild(_newImage);
       console.log(username.value + ":" + email.value + ":" + address.value + ":" + (admin.checked ? "X" : "-"));
     }
   }
